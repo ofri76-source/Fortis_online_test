@@ -19,7 +19,8 @@ class Fortis_Toolbox_Plugin
     public function __construct()
     {
         add_action('admin_menu', [$this, 'register_menu']);
-        add_action('admin_enqueue_scripts', [$this, 'enqueue_assets']);
+        add_action('admin_enqueue_scripts', [$this, 'enqueue_admin_assets']);
+        add_shortcode('fortis_toolbox', [$this, 'render_shortcode']);
     }
 
     public function register_menu(): void
@@ -35,27 +36,35 @@ class Fortis_Toolbox_Plugin
         );
     }
 
-    public function enqueue_assets(string $hook): void
+    public function enqueue_admin_assets(string $hook): void
     {
         if ($hook !== 'toplevel_page_' . self::SLUG) {
             return;
         }
 
+        $this->enqueue_shared_assets();
+    }
+
+    private function enqueue_shared_assets(): void
+    {
+        $style_handle = 'fortis-toolbox-admin';
+        $script_handle = 'fortis-toolbox-admin';
+
         wp_enqueue_style(
-            'fortis-toolbox-admin',
+            $style_handle,
             plugin_dir_url(__FILE__) . 'fortis-toolbox.css',
             [],
             '0.1.0'
         );
         wp_enqueue_script(
-            'fortis-toolbox-admin',
+            $script_handle,
             plugin_dir_url(__FILE__) . 'fortis-toolbox.js',
             [],
             '0.1.0',
             true
         );
         wp_localize_script(
-            'fortis-toolbox-admin',
+            $script_handle,
             'FortisToolboxConfig',
             [
                 'nonce' => wp_create_nonce(self::NONCE_ACTION),
@@ -77,8 +86,25 @@ class Fortis_Toolbox_Plugin
             wp_die(__('You do not have permission to access this page.', 'fortis-toolbox'));
         }
 
-        echo '<div class="wrap fortis-toolbox">';
-        echo '<h1>' . esc_html__('Fortis Toolbox', 'fortis-toolbox') . '</h1>';
+        $this->render_interface();
+    }
+
+    public function render_shortcode(): string
+    {
+        $this->enqueue_shared_assets();
+
+        ob_start();
+        $this->render_interface(false);
+        return ob_get_clean();
+    }
+
+    private function render_interface(bool $wrap = true): void
+    {
+        if ($wrap) {
+            echo '<div class="wrap fortis-toolbox">';
+            echo '<h1>' . esc_html__('Fortis Toolbox', 'fortis-toolbox') . '</h1>';
+        }
+
         printf('<input type="hidden" id="%s" value="%s" />', esc_attr(self::NONCE_NAME), esc_attr(wp_create_nonce(self::NONCE_ACTION)));
 
         echo '<nav class="ft-tabs">';
@@ -106,7 +132,9 @@ class Fortis_Toolbox_Plugin
         $this->render_settings_tab();
         echo '</div>';
 
-        echo '</div>';
+        if ($wrap) {
+            echo '</div>';
+        }
     }
 
     private function render_cli_panel(string $id_prefix, string $title, array $actions = []): void
