@@ -1,5 +1,20 @@
 .fortis-toolbox {
     font-family: Arial, sans-serif;
+    direction: ltr;
+    text-align: left;
+}
+.fortis-toolbox input,
+.fortis-toolbox select,
+.fortis-toolbox textarea,
+.fortis-toolbox button {
+    padding: calc(8px * 0.6) calc(12px * 0.6);
+    min-height: calc(32px * 0.6);
+    line-height: 1.2;
+}
+.fortis-toolbox button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 .ft-tabs {
     margin: 12px 0;
@@ -35,6 +50,7 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+    align-items: flex-start;
 }
 .ft-card {
     border: 1px solid #e5e7eb;
@@ -52,10 +68,12 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
+    align-items: flex-start;
 }
 .ft-cli {
     width: 100%;
     font-family: monospace;
+    text-align: left;
 }
 .ft-cli-actions {
     display: flex;

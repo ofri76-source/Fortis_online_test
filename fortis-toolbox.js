@@ -288,6 +288,24 @@
             }
         });
 
+        document.getElementById('model-add-row')?.addEventListener('click', (e) => {
+            e.preventDefault();
+            addTableRow('model-table', [
+                '<input type="text" class="model-name" />',
+                '<input type="text" class="model-lan" />',
+                '<input type="text" class="model-wan1" />',
+                '<input type="text" class="model-wan2" />',
+                '<button class="button link-button model-delete">×</button>',
+            ]);
+        });
+
+        document.getElementById('model-table')?.addEventListener('click', (e) => {
+            if (e.target.classList.contains('model-delete')) {
+                e.preventDefault();
+                e.target.closest('tr').remove();
+            }
+        });
+
         document.getElementById('import-add-map')?.addEventListener('click', (e) => {
             e.preventDefault();
             addTableRow('import-map', [
