@@ -1,0 +1,112 @@
+.fortis-toolbox {
+    font-family: Arial, sans-serif;
+    direction: ltr;
+    text-align: left;
+}
+.fortis-toolbox input,
+.fortis-toolbox select,
+.fortis-toolbox textarea,
+.fortis-toolbox button {
+    padding: calc(8px * 0.6) calc(12px * 0.6);
+    min-height: calc(32px * 0.6);
+    line-height: 1.2;
+}
+.fortis-toolbox button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.ft-tabs {
+    margin: 12px 0;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.ft-tab {
+    background: #f3f4f6;
+    border: 1px solid #ccd0d4;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+.ft-tab.is-active {
+    background: #2271b1;
+    color: #fff;
+}
+.ft-tab-pane {
+    display: none;
+}
+.ft-tab-pane.is-active {
+    display: block;
+}
+.ft-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+.ft-grid.three {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+.ft-column {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+}
+.ft-card {
+    border: 1px solid #e5e7eb;
+    padding: 12px;
+    background: #fff;
+}
+.section-title {
+    margin: 0 0 8px 0;
+}
+.section-description {
+    margin: 0 0 12px 0;
+    color: #555;
+}
+.ft-cli-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+}
+.ft-cli {
+    width: 100%;
+    font-family: monospace;
+    text-align: left;
+}
+.ft-cli-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.ft-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+}
+.ft-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+}
+.ft-table th,
+.ft-table td {
+    border: 1px solid #e5e7eb;
+    padding: 6px 8px;
+    text-align: left;
+}
+.ft-fieldset {
+    border: 1px solid #e5e7eb;
+    padding: 8px;
+    margin: 8px 0;
+}
+.ft-help {
+    color: #666;
+    margin: 4px 0 8px 0;
+}
+.ft-version {
+    font-style: italic;
+    color: #555;
+}
